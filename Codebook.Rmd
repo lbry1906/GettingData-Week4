@@ -1,0 +1,60 @@
+---
+title: "Tidy Data"
+author: "Lamont Bryant"
+date: "8/22/2020"
+output: html_document
+---
+
+### Overview
+This code takes train and test datasets and merges them together to create a tidy dataset for analysis.
+
+#### Part 1 - Download dataset
+The data is downloaded and extracted from the folder called `UCI HAR Dataset`.
+
+#### Part 2 - Assign data to a variable
+- **features** <- features.txt" : 561 rows, 2 columns. 
+**features** contain the various measurements recorded.
+- **activities** <- activity_labels.txt" : 6 rows, 2 columns. 
+**activities** list the different activities performed when the measurements are taken.
+- **subject_test** <- subject_test.txt" : 2947 rows, 1 column.
+**subject_test** contains the test data for 9/30 test subjects being observed.
+- **subject_train** <- subject_train.txt" : 7352 rows, 1 column.
+**subject_train** contains the test data for 21/30 test subjects being observed.
+- **x_test** <- x_test.txt" : 2947 rows, 561 columns.
+**x_test** contains recorded features test data.
+- **y_test** <- y_test.txt" : 2947 rows, 1 column.
+**y_test** contains test data of activities' code labels.
+- **x_train** <- X_train.txt" : 7352 rows, 561 columns.
+**x_train** contains recorded features train data.
+- **y_train** <- y_train.txt" : 7352 rows, 1 column.
+**y_train** contains train data of activities' code labels.
+
+#### Part 3 - Merge the training and test sets to create one dataset
+- **x** created when **x_test** and **x_train** are combined by rbind(); 10299 rows, 561 columns
+- **y** created when **y_test** and **y_train** are combined by rbind(); 10299 rows, 1 column
+- **subjcomb** created when **subject_test** and **subject_train** are combined by rbind(); 10299 rows, 1 column
+- **merge** created by combining **x**, **y**, and **subjcomb** by cbind(); 10299 rows, 563 columns
+
+#### Part 4 - Extract measurements for the mean and standard deviation
+**extracted** is created by subsetting **merge** with the columns that only contain `mean` or `standard deviation`.
+
+#### Part 5 - Add descriptive activity names to the activities in the dataset
+The numbers in the `code` column of **extracted** are replaced with the activity taken from the `Functions` column of **activities**
+
+#### Part 6 - Label the dataset with descriptive variable names
+- The `code` column in **extracted** is renamed to `Activity`
+- All `Acc` in **extracted** is renamed to `Accelerometer`
+- All `Gyro` in **extracted** is renamed to `Gyroscope`
+- All `BodyBody` in **extracted** is renamed to `Body`
+- All `Mag` in **extracted** is renamed to `Magnitude`
+- All beginning `f` characters in **extracted** are renamed to `Frequency`
+- All beginning `t` characters in **extracted** are renamed to `Time`
+- All `tbody` or `tBody` in **extracted** is renamed to `Timebody`
+- All `mean` in **extracted** is renamed to `Mean`
+- All `std` in **extracted** is renamed to `STD`
+- All `freq` in **extracted** is renamed to `Frequency`
+- All `angle` in **extracted** is renamed to `Angle`
+- All `gravity` in **extracted** is renamed to `Gravity`
+
+#### Part 7 - Create a tidy dataset with the average of each variable from each activity by subject
+**FinalData** is created by summarizing **merge**. The data is grouped by `Subject` and `Activity`, the mean is returned, and the data is then exported to the `FinalData.txt` file.
