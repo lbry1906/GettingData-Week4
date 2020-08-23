@@ -1,0 +1,25 @@
+---
+title: "README"
+author: "Lamont Bryant"
+date: "8/22/2020"
+output: html_document
+---
+
+### Overview
+
+This submission is for the Getting and Cleaning Data course. 
+
+### DATASET
+
+Human Activity Recognition Using Smartphones
+
+### Files
+* `Codebook.Rmd`is a book that describes the data used, the variables, and transformations to the data to make it tidy.
+
+* `run_analysis.R` is the script that downloads the data and does the following 5 steps:
+  * Merges the training and test datasets into one file for analysis.
+  * Extracts measurements on the mean and standard deviation for each activity.
+  * Uses descriptive activity names to name the activities in the dataset.
+  * Labels the dataset with descriptive variable names.
+  * Creates a tidy dataset and return the mean for each activity.
+* `FinalData.txt` is the exported file after using the sequences described above.
